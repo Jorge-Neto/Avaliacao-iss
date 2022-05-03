@@ -1,12 +1,18 @@
-import Folha from "../models/Folha";
-
-const folhas = [
-  { id: 1, name: "Jorge", language: "JavaScript" },
-  { id: 2, name: "Oliveira", language: "Java" },
-  { id: 3, name: "Neto", language: "C++" },
-];
+var folhas = [];
 
 class FolhasController {
+
+  listar(req, res) {
+    const novasFolhas = req.body;
+    novasFolhas.forEach(novaFolha => {
+      novaFolha.
+    });
+
+
+    console.log(folhas);
+    res.send(folhas);
+  }
+
   index(req, res) {
     return res.json(folhas);
   }

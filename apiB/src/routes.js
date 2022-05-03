@@ -4,7 +4,7 @@ import folhas from "./app/controllers/FolhasController";
 
 const routes = new Router();
 
-routes.get("/folha/calcular", folhas.calculate);
+routes.post("/folha/listar", folhas.listar);
 
 routes.get("/folha", folhas.index);
 routes.get("/folha/:id", folhas.show);

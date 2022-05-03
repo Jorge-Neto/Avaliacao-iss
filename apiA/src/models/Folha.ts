@@ -6,7 +6,8 @@ export interface Folha {
     valor: number;
     funcionario: {
         nome: string,
-        cpf: string;
+        cpf: string
     }
-    processada: boolean
+    processada: boolean;
+    bruto?: number;
   }

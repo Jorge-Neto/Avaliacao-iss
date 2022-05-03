@@ -10,25 +10,33 @@ export class FolhaController {
     folha.processada = false;
     const folhas = folhaRepository.cadastrar(folha);
 
-
     response.status(201).json({ message: "Folha cadastrada na base de dados", data: folhas });
   }
 
   calcular(request: Request, response: Response) {
-    const folha = request.body;
-    const folhas = folhaRepository.cadastrar(folha);
+    const folhasSemProcessar = folhaRepository.listar();
+    let resposta: any = "";
 
-    //fetch ou axios
+    folhasSemProcessar.map(folha => {
+      if (folha.processada === false) {
+        folha.bruto = (folha.horas * folha.valor);
+        folha.processada = true;
+        folhaRepository.alterar(folha);
+        return folha;
+      }
+    });
+
+    const folhasProcessadas = folhaRepository.listar();
     axios
-      .post("http://localhost:3334/folha/cadastrar", folha)
+      .post("http://localhost:3001/folha/listar", folhasProcessadas)
       .then((response) => {
-        console.log(response);
+        resposta = response;
       })
       .catch((error) => {
         console.log(error);
       });
 
-    response.status(201).json({ message: "Folha cadastrado", data: folhas });
+    response.status(201).json({ message: "Folha cadastrada", data: resposta });
   }
 
   listar(request: Request, response: Response) {
