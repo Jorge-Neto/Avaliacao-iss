@@ -56,13 +56,15 @@ class FolhasController {
       novaFolha.liquido = ((novaFolha.bruto - novaFolha.irrf) - novaFolha.inss);
       folhas.push(novaFolha);
     });
-    console.log(folhas)
     res.send(folhas);
   }
-  listar(req, res) {
-    const {cpf, mes, ano} = req.body;
-    console.log(cpf, mes, ano);
 
+  listarUm(req, res) {
+    const {cpf, mes, ano} = req.params;
+
+    var folha = folhas.map(folha => folha.funcionario.cpf === toString(cpf))
+    console.log(cpf, folha);
+    res.send(folha)
   }
 
   index(req, res) {
