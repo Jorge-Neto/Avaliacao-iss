@@ -13,30 +13,34 @@ export class FolhaController {
     response.status(201).json({ message: "Folha cadastrada na base de dados", data: folhas });
   }
 
-  calcular(request: Request, response: Response) {
+  async calcular(request: Request, response: Response) {
     const folhasSemProcessar = folhaRepository.listar();
+    var folhasProcessadas: any = [];
     let resposta: any = "";
 
     folhasSemProcessar.map(folha => {
       if (folha.processada === false) {
         folha.bruto = (folha.horas * folha.valor);
         folha.processada = true;
-        folhaRepository.alterar(folha);
+        folhasProcessadas.push(folha);
         return folha;
       }
     });
 
-    const folhasProcessadas = folhaRepository.listar();
-    axios
-      .post("http://localhost:3001/folha/listar", folhasProcessadas)
+    await axios({
+      method: "post",
+      url: "http://localhost:3001/folha/listar",
+      data: folhasProcessadas
+    })
       .then((response) => {
-        resposta = response;
+        resposta = response.data;
+        console.log(resposta)
       })
       .catch((error) => {
         console.log(error);
       });
 
-    response.status(201).json({ message: "Folha cadastrada", data: resposta });
+    response.status(201).send(resposta);
   }
 
   listar(request: Request, response: Response) {
@@ -54,4 +58,7 @@ export class FolhaController {
     const folhas = folhaRepository.remover(id);
     response.status(200).json({ message: "Folha de pagamento removida", data: folhas });
   }
+}
+function data(arg0: string, data: any, folhasProcessadas: any) {
+  throw new Error("Function not implemented.");
 }

@@ -62,7 +62,12 @@ class FolhasController {
   listarUm(req, res) {
     const {cpf, mes, ano} = req.params;
 
-    var folha = folhas.map(folha => folha.funcionario.cpf === toString(cpf))
+    var folha = '';
+    folha = folhas.map(folha => {
+      if (folha.funcionario.cpf === cpf && folha.funcionario.mes === mes && folha.funcionario.ano === ano) {
+        return folha;
+      }
+    });
     console.log(cpf, folha);
     res.send(folha)
   }
