@@ -5,6 +5,7 @@ import folhas from "./app/controllers/FolhasController";
 const routes = new Router();
 
 routes.post("/folha/listar", folhas.listar);
+routes.get("/folha/consultar/:cpf/:mes/:ano", folhas.listarUm);
 
 routes.get("/folha", folhas.index);
 routes.get("/folha/:id", folhas.show);
