@@ -1,4 +1,4 @@
-import { calcularImpostoRenda, calcularInss, calcularFgts } from '../functions/Descontos'
+import calculaLiquido from "../functions/CalculaLiquido";
 
 var folhas = [];
 
@@ -8,16 +8,17 @@ class FolhasController {
     let novasfolhas = req.body;
 
     if (JSON.stringify(novasfolhas) === "{}") {
-
-      return res.status(404).send({ error: "Request body error"});
+      return res.status(400).send({ error: "Request body error" });
     }
+
     novasfolhas.forEach(folha => {
       let salarioBruto = folha.bruto;
 
-      folha.irrf = calcularImpostoRenda(salarioBruto);
-      folha.inss = calcularInss(salarioBruto)
-      folha.fgts = calcularFgts(salarioBruto);
-      folha.liquido = calcularLiquido(salarioBruto, folha.irrf, folha.inss);
+      let data = calculaLiquido(salarioBruto);
+      folha = {
+        ...folha,
+        ...data
+      };
 
       novasfolhas.push(folha);
     });
@@ -35,9 +36,10 @@ class FolhasController {
     });
 
     if (folha.length < 1) {
-        return res.status(404).send({ error: "Not Found"});
+      return res.status(404).send({ error: "Not Found" });
     }
-    res.status(200).send(folha)
+
+    res.status(200).send(folha);
   }
 
 }

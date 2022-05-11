@@ -1,4 +1,4 @@
-export function calcularImpostoRenda(salarioBruto) {
+export function calculaImpostoRenda(salarioBruto) {
     let [ir, aliquotaIR, taxa] = [1, 1, 1];
 
     if (salarioBruto <= 1903.98) {
@@ -27,7 +27,7 @@ export function calcularImpostoRenda(salarioBruto) {
     return ir.toFixed(1);
 }
 
-export function calcularInss(salarioBruto) {
+export function calculaInss(salarioBruto) {
     let [descontoInss, faixaUm, faixaDois, faixaTres, faixaQuatro] = [0, 135.49, 101.62, 310.51, 621.03];
 
     if (salarioBruto <= 1693.72) {
@@ -42,14 +42,8 @@ export function calcularInss(salarioBruto) {
     return descontoInss.toFixed(1);
 }
 
-export function calcularFgts(salarioBruto) {
+export function calculaFgts(salarioBruto) {
     let fgts = (salarioBruto * 0.08);
 
     return fgts.toFixed(1);
-}
-
-export function calcularLiquido(salarioBruto, irrf, inss) {
-    let liquido = salarioBruto - irrf - inss;
-
-    return liquido.toFixed(1);
 }
