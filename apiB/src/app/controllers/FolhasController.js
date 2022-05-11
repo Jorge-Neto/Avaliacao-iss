@@ -30,7 +30,7 @@ class FolhasController {
     const { cpf, mes, ano } = req.params;
 
     let folha = folhas.map(folha => {
-      if (folha.funcionario.cpf === cpf && folha.funcionario.mes === mes && folha.funcionario.ano === ano) {
+      if (folha.funcionario.cpf === cpf && folha.ano === ano && folha.mes === mes) {
         return folha;
       }
     });
