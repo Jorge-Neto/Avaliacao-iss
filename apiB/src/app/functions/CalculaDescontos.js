@@ -28,16 +28,28 @@ export function calculaImpostoRenda(salarioBruto) {
 }
 
 export function calculaInss(salarioBruto) {
-    let [descontoInss, faixaUm, faixaDois, faixaTres, faixaQuatro] = [0, 135.49, 101.62, 310.51, 621.03];
+    let [
+        descontoInss,
+        descontoUm,
+        descontoDois,
+        descontoTres,
+        descontoQuatro
+    ] = [
+            0,
+            135.49,
+            101.62,
+            310.51,
+            621.03
+        ];
 
     if (salarioBruto <= 1693.72) {
-        descontoInss = faixaUm;
+        descontoInss = descontoUm;
     } else if (salarioBruto > 1693.72 && salarioBruto < 2822.91) {
-        descontoInss = faixaUm + ((salarioBruto - 1693.73) * 0.09);
+        descontoInss = descontoUm + ((salarioBruto - 1693.73) * 0.09);
     } else if (salarioBruto > 2822.90 && salarioBruto < 5645.81) {
-        descontoInss = faixaUm + faixaDois + ((salarioBruto - 2822.91) * 0.11);
+        descontoInss = descontoUm + descontoDois + ((salarioBruto - 2822.91) * 0.11);
     } else if (salarioBruto >= 5645.81) {
-        descontoInss = faixaUm + faixaDois + faixaTres + faixaQuatro
+        descontoInss = descontoUm + descontoDois + descontoTres + descontoQuatro
     }
     return descontoInss.toFixed(1);
 }

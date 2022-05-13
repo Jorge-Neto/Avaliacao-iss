@@ -1,7 +1,6 @@
 import { calculaFgts, calculaImpostoRenda, calculaInss } from "../functions/CalculaDescontos";
 
 function calculaLiquido(salarioBruto) {
-
     let irrf = calculaImpostoRenda(salarioBruto);
     let inss = calculaInss(salarioBruto)
     let fgts = calculaFgts(salarioBruto);

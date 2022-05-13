@@ -13,8 +13,8 @@ class FolhasController {
 
     novasfolhas.forEach(folha => {
       let salarioBruto = folha.bruto;
-
       let data = calculaLiquido(salarioBruto);
+
       folha = {
         ...folha,
         ...data
