@@ -10,4 +10,4 @@ export interface Folha {
     }
     processada: boolean;
     bruto?: number;
-  }
+}
