@@ -36,7 +36,7 @@ class FolhasController {
     });
 
     if (folha.length < 1) {
-      return res.status(404).send({ error: "Not Found" });
+      return res.status(404).send({ error: "Payroll Not Found" });
     }
 
     res.status(200).send(folha);

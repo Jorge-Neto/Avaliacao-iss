@@ -9,7 +9,7 @@ function calculaLiquido(salarioBruto) {
 
     let data = { irrf, inss, fgts, liquido };
 
-    return data.toFixed(1);
+    return data;
 }
 
 export default calculaLiquido();

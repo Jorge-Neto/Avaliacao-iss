@@ -4,6 +4,10 @@ import folhas from "./app/controllers/FolhasController";
 
 const routes = new Router();
 
+routes.get("/", (req, res) => {
+    res.json({ message: "API que auxilia a API A" });
+});
+
 routes.get("/folha/listar", folhas.listar);
 routes.get("/folha/consultar/:cpf/:mes/:ano", folhas.listarUm);
 
