@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import folhas from "./app/controllers/FolhasController";
+import folhas from "./app/controllers/FolhasController.js";
 
 const routes = new Router();
 

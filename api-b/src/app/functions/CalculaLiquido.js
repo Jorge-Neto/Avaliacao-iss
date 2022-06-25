@@ -1,4 +1,4 @@
-import { calculaFgts, calculaImpostoRenda, calculaInss } from "../functions/CalculaDescontos";
+import { calculaFgts, calculaImpostoRenda, calculaInss } from "./CalculaDescontos.js";
 
 function calculaLiquido(salarioBruto) {
     let irrf = calculaImpostoRenda(salarioBruto);

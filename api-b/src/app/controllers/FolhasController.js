@@ -1,4 +1,4 @@
-import calculaLiquido from "../functions/CalculaLiquido";
+import calculaLiquido from "../functions/CalculaLiquido.js";
 
 var folhas = [];
 

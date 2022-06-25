@@ -1,7 +1,8 @@
 {
-  "name": "apiA",
+  "name": "apiB",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon ./src/server.js",
