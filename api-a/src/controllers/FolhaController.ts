@@ -27,7 +27,7 @@ export class FolhaController {
 
     await axios({
       method: "post",
-      url: "http://localhost:3001/folha/listar",
+      url: "http://api-b:3001/folha/listar",
       data: folhasProcessadas
     })
       .then((response) => {
