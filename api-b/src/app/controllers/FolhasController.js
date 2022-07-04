@@ -4,14 +4,18 @@ var folhas = [];
 
 class FolhasController {
 
-  listar(req, res) {
-    let novasfolhas = req.body;
+  addFolhas(data) {
+    folhas.push(data);
+  }
 
-    if (JSON.stringify(novasfolhas) === "{}") {
+  listar(req, res) {
+    let novasFolhas = req.body;
+
+    if (JSON.stringify(novasFolhas) === "{}") {
       return res.status(400).send({ error: "Request body error" });
     }
 
-    novasfolhas.forEach(folha => {
+    novasFolhas.forEach(folha => {
       let salarioBruto = folha.bruto;
       let data = calculaLiquido(salarioBruto);
 
@@ -20,10 +24,10 @@ class FolhasController {
         ...data
       };
 
-      novasfolhas.push(folha);
+      folhas.push(folha);
     });
 
-    res.status(200).send(novasfolhas);
+    res.status(200).send(novasFolhas);
   }
 
   listarUm(req, res) {

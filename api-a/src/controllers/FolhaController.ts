@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Request, Response } from "express";
 import { FolhaRepository } from "../repositories/FolhaRepository";
+import RabbitmqServer from "../rabbitmq-server";
 
 var folhaRepository = new FolhaRepository();
 
@@ -25,19 +26,24 @@ export class FolhaController {
       }
     });
 
-    await axios({
-      method: "post",
-      url: "http://api-b:3001/folha/listar",
-      data: folhasProcessadas
-    })
-      .then((response) => {
-        resposta = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // await axios({
+    //   method: "post",
+    //   url: "http://api-b:3001/folha/listar",
+    //   data: folhasProcessadas
+    // })
+    //   .then((response) => {
+    //     resposta = response.data;
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
-    response.status(201).send(resposta);
+    //Envia ao MB
+    const server = new RabbitmqServer('amqp://admin:admin@rabbitmq:5672');
+    await server.start();
+    await server.publishInQueue('api-b', JSON.stringify(folhasProcessadas));
+
+    response.status(201).send("As folhas foram enviadas à api B");
   }
 
   listar(request: Request, response: Response) {

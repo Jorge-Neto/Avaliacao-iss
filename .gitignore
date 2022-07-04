@@ -1,2 +1,4 @@
 api-a/node_modules
 api-b/node_modules
+
+.rabbitmq_data/*

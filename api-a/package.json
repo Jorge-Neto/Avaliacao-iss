@@ -1,5 +1,5 @@
 {
-  "name": "crud_pessoas",
+  "name": "api-a",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/amqplib": "^0.8.2",
     "@types/axios": "^0.14.0",
+    "amqplib": "^0.10.0",
     "axios": "^0.26.1",
     "express": "^4.17.3"
   },
