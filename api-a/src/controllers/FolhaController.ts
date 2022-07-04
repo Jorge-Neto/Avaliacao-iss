@@ -1,7 +1,7 @@
-import axios from "axios";
 import { Request, Response } from "express";
-import { FolhaRepository } from "../repositories/FolhaRepository";
 import RabbitmqServer from "../rabbitmq-server";
+import { FolhaRepository } from "../repositories/FolhaRepository";
+// import axios from "axios";
 
 var folhaRepository = new FolhaRepository();
 
@@ -26,6 +26,10 @@ export class FolhaController {
       }
     });
 
+    if(folhasProcessadas.length < 1) {
+      response.status(201).send({ message: "Não há folhas de pagamento para serem processadas" });
+    }
+
     // await axios({
     //   method: "post",
     //   url: "http://api-b:3001/folha/listar",
@@ -43,7 +47,7 @@ export class FolhaController {
     await server.start();
     await server.publishInQueue('api-b', JSON.stringify(folhasProcessadas));
 
-    response.status(201).send("As folhas foram enviadas à api B");
+    response.status(201).send({ message: "As folhas foram enviadas para processamento" });
   }
 
   listar(request: Request, response: Response) {

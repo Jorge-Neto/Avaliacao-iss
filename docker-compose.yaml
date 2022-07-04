@@ -9,7 +9,7 @@ services:
       - "15672:15672"
       - "5672:5672"
     volumes:
-      - "./.rabbitmq_data:/var/lib/rabbitmq/"
+      - "./.rabbitmq_data:/var/lib/rabbitmq/mnesia"
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin

@@ -12,6 +12,11 @@ export default class RabbitmqServer {
   }
 
   async publishInQueue(queue: string, message: string) {
-    return this.channel.sendToQueue(queue, Buffer.from(message));
+    this.channel.assertQueue(queue, {
+      durable: true
+    });
+    return this.channel.sendToQueue(queue, Buffer.from(message), {
+      persistent: true
+    });
   }
 }
