@@ -30,18 +30,6 @@ export class FolhaController {
       response.status(201).send({ message: "Não há folhas de pagamento para serem processadas" });
     }
 
-    // await axios({
-    //   method: "post",
-    //   url: "http://api-b:3001/folha/listar",
-    //   data: folhasProcessadas
-    // })
-    //   .then((response) => {
-    //     resposta = response.data;
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
     //Envia ao MB
     const server = new RabbitmqServer('amqp://admin:admin@rabbitmq:5672');
     await server.start();

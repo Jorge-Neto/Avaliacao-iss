@@ -14,21 +14,6 @@ services:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
 
-  api-b:
-    build:
-      context: "./api-b"
-      dockerfile: Dockerfile
-    restart: always
-    container_name: api-b
-    links:
-      - rabbitmq
-    volumes:
-      - ./api-b:/home/node/app
-    ports:
-      - 3001:3001
-    depends_on:
-      - rabbitmq
-
   api-a:
     build:
       context: "./api-a"
@@ -43,4 +28,19 @@ services:
       - 3000:3000
     depends_on:
       - rabbitmq
-      - api-b
+
+  api-b:
+    build:
+      context: "./api-b"
+      dockerfile: Dockerfile
+    restart: always
+    container_name: api-b
+    links:
+      - rabbitmq
+    volumes:
+      - ./api-b:/home/node/app
+    ports:
+      - 3001:3001
+    depends_on:
+      - rabbitmq
+      - api-a
