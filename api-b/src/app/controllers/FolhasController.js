@@ -5,11 +5,6 @@ var folhas = [];
 
 class FolhasController {
 
-  // addFolhas(data) {
-  //   folhas.push(data);
-  //   console.log(folhas);
-  // }
-
   async listar(req, res) {
     var novasFolhas = [];
 
@@ -62,11 +57,10 @@ class FolhasController {
   listarUm(req, res) {
     const { cpf, mes, ano } = req.params;
 
-    console.log(folhas);
     if (folhas.length < 1) {
       return res.status(404).send({ error: "There are no registered payrolls" });
     }
-    console.log(cpf, mes, ano);
+
     var folha = folhas.map(folha => {
       if (folha.funcionario.cpf === cpf && folha.mes.toString() === mes && folha.ano.toString() === ano) {
         return folha;
